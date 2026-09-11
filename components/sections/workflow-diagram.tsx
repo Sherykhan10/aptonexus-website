@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, Fragment } from "react";
 import { workflow } from "@/content/pages";
 import { Icon } from "@/components/ui/icon";
 export function WorkflowDiagram() {
@@ -55,21 +55,27 @@ export function WorkflowDiagram() {
           </h2>
         </div>
 
-        <div className="flowforge-workflow-row">
+        <div className="flowforge-workflow-row flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 max-w-[1200px] mx-auto w-full">
           {flowCards.map((card, i) => {
             const isActive = active === i;
             return (
-              <div key={card.title} className="flowforge-card-wrapper">
+              <Fragment key={card.title}>
                 <button
                   type="button"
-                  className={`flowforge-workflow-card ${isActive ? "active-purple" : ""}`}
+                  className={`flowforge-workflow-card w-full max-w-[360px] md:max-w-none md:w-auto md:flex-1 mx-auto md:mx-0 ${
+                    isActive ? "active-purple" : ""
+                  }`}
                   onClick={() => setActive(i)}
                   onMouseEnter={() => setActive(i)}
                   aria-pressed={isActive}
                 >
                   <div
                     className={`flowforge-card-icon-circle ${
-                      isActive ? "icon-purple" : card.isCheck ? "icon-green" : "icon-neutral"
+                      isActive
+                        ? "icon-purple"
+                        : card.isCheck
+                        ? "icon-green"
+                        : "icon-neutral"
                     }`}
                   >
                     <Icon name={card.icon} />
@@ -78,11 +84,19 @@ export function WorkflowDiagram() {
                   <p>{card.text}</p>
                 </button>
                 {i < flowCards.length - 1 && (
-                  <span className="flowforge-card-arrow" aria-hidden="true">
-                    →
-                  </span>
+                  <div
+                    className="flowforge-card-arrow-wrapper flex items-center justify-center py-2 md:py-0 px-0 md:px-1 flex-shrink-0"
+                    aria-hidden="true"
+                  >
+                    <span className="flowforge-card-arrow inline-flex items-center justify-center text-slate-400">
+                      <Icon
+                        name="arrow"
+                        className="w-5 h-5 rotate-90 md:rotate-0 transition-transform duration-200"
+                      />
+                    </span>
+                  </div>
                 )}
-              </div>
+              </Fragment>
             );
           })}
         </div>

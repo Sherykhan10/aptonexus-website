@@ -1,21 +1,18 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { site } from "@/content/site";
-import { VideoPlayer } from "./video-player";
+
 export function HeroMedia() {
   const video = useRef<HTMLVideoElement>(null);
-  const [allowed, setAllowed] = useState(false);
+  const [allowed, setAllowed] = useState(true);
   const [mobile, setMobile] = useState(false);
-  const [paused, setPaused] = useState(false);
   const [failed, setFailed] = useState(false);
+
   useEffect(() => {
     const motion = matchMedia("(prefers-reduced-motion: reduce)");
     const size = matchMedia("(max-width: 1099px)");
-    const connection = (
-      navigator as Navigator & { connection?: { saveData?: boolean } }
-    ).connection;
     const update = () => {
-      setAllowed(!motion.matches && !connection?.saveData);
+      setAllowed(!motion.matches);
       setMobile(size.matches);
     };
     update();
@@ -26,11 +23,19 @@ export function HeroMedia() {
       size.removeEventListener("change", update);
     };
   }, []);
+
   useEffect(() => {
-    if (!video.current) return;
-    if (paused) video.current.pause();
-    else if (allowed) void video.current.play().catch(() => setFailed(true));
-  }, [paused, allowed, mobile]);
+    const el = video.current;
+    if (!el) return;
+    el.muted = true;
+    el.defaultMuted = true;
+    if (allowed) {
+      void el.play().catch((err) => {
+        console.warn("Autoplay deferred:", err);
+      });
+    }
+  }, [allowed, mobile]);
+
   return (
     <div className="hero-media">
       <picture
@@ -53,16 +58,21 @@ export function HeroMedia() {
         <video
           key={mobile ? "mobile" : "desktop"}
           ref={video}
-          autoPlay={!paused}
+          autoPlay
           muted
-          playsInline
           loop
-          preload="none"
+          playsInline
+          preload="auto"
           poster={
             mobile
               ? site.brand.heroLoop.mobilePoster
               : site.brand.heroLoop.poster
           }
+          onCanPlay={(e) => {
+            const target = e.currentTarget;
+            target.muted = true;
+            target.play().catch(() => {});
+          }}
           onError={() => setFailed(true)}
           aria-hidden="true"
         >
@@ -74,30 +84,6 @@ export function HeroMedia() {
         </video>
       )}
       <div className="hero-media-shade" />
-      <div className="hero-media-controls right-4 bottom-4 md:right-9 md:bottom-8 z-20">
-        <VideoPlayer
-          compact
-          label="Watch Video"
-          src={site.brand.film.mp4}
-          poster={site.brand.film.poster}
-          title="the brand film"
-          description="AptoNexus brand artwork: an animated robot on a black and lime stage, followed by the AptoNexus logo."
-        />
-        {allowed && !failed && (
-          <button
-            className="motion-toggle"
-            aria-label={
-              paused ? "Resume background motion" : "Pause background motion"
-            }
-            title={
-              paused ? "Resume background motion" : "Pause background motion"
-            }
-            onClick={() => setPaused(!paused)}
-          >
-            <span aria-hidden="true">{paused ? "▷" : "Ⅱ"}</span>
-          </button>
-        )}
-      </div>
     </div>
   );
 }

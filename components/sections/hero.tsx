@@ -4,8 +4,8 @@ import { HeroMedia } from "@/components/media/hero-media";
 export function Hero() {
   return (
     <section className="hero">
-      <div className="container hero-content">
-        <div className="w-[55%] max-w-[58%] md:w-auto md:max-w-none relative z-10">
+      <div className="container hero-content flex flex-col justify-center">
+        <div className="w-[64%] max-w-[66%] md:w-auto md:max-w-none z-10 flex flex-col justify-center">
           <p className="hero-eyebrow-tag">
             AI • AUTOMATION • INNOVATION
           </p>
@@ -19,8 +19,8 @@ export function Hero() {
             the{" "}
             <span className="hero-title-accent">{home.heading[2]}</span>
           </h1>
-          <p className="hero-description">{home.description}</p>
-          <div className="hero-actions-row">
+          <p className="hero-description hidden md:block">{home.description}</p>
+          <div className="hero-actions-row hidden md:flex">
             <a className="hero-btn-primary" href="/contact" data-contact-trigger>
               Start a Project
               <span aria-hidden="true">→</span>
@@ -34,6 +34,13 @@ export function Hero() {
             </span>
           ))}
         </div>
+      </div>
+      {/* Mobile CTA Button positioned at the absolute bottom of the Hero section */}
+      <div className="hero-actions-row-mobile md:hidden absolute bottom-5 left-4 z-25">
+        <a className="hero-btn-primary" href="/contact" data-contact-trigger>
+          Start a Project
+          <span aria-hidden="true">→</span>
+        </a>
       </div>
       <HeroMedia />
       <div className="container hero-bottom">

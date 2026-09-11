@@ -23,8 +23,8 @@ export function Navbar() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className={`navbar ${scrolled ? "scrolled" : ""}`}>
-        <div className="container nav-inner">
+      <header className={`navbar relative z-[100] ${scrolled ? "scrolled" : ""}`}>
+        <div className="container nav-inner relative z-[100]">
           <Link className="brand" href="/" aria-label={`${site.name} home`}>
             <BrandMark priority />
             <span>{site.name}</span>
@@ -45,7 +45,7 @@ export function Navbar() {
             ))}
           </nav>
           <a
-            className="button primary nav-cta"
+            className="button primary nav-cta hidden md:inline-flex"
             href="/contact"
             data-contact-trigger
           >
@@ -53,13 +53,28 @@ export function Navbar() {
             <span aria-hidden="true">→</span>
           </a>
           <button
-            className="icon-button mobile-menu"
+            type="button"
+            className="icon-button mobile-menu relative z-[9999] cursor-pointer text-[#166534] border-[#166534]/25"
+            style={{
+              pointerEvents: "auto",
+              touchAction: "manipulation",
+              color: "#166534",
+            }}
             aria-label="Open navigation"
             aria-haspopup="dialog"
             aria-expanded={open}
-            onClick={() => setOpen(true)}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setOpen(true);
+            }}
+            onTouchEnd={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              setOpen(true);
+            }}
           >
-            <Icon name="menu" />
+            <Icon name="menu" className="w-6 h-6 text-[#166534]" />
           </button>
         </div>
       </header>

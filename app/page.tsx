@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/hero";
+import { TestimonialMarquee } from "@/components/sections/testimonials";
 import {
   Capabilities,
   ServicesSection,
@@ -19,6 +20,7 @@ export default function Home() {
       <ServicesSection />
       <WorkflowDiagram />
       <SelectedWork />
+      <TestimonialMarquee />
       <Outcomes />
       <ProcessSection />
       <IndustriesGrid />
