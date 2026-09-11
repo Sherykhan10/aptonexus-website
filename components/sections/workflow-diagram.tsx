@@ -55,14 +55,14 @@ export function WorkflowDiagram() {
           </h2>
         </div>
 
-        <div className="flowforge-workflow-row flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 max-w-[1200px] mx-auto w-full">
+        <div className="flowforge-workflow-row flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 max-w-300 mx-auto w-full">
           {flowCards.map((card, i) => {
             const isActive = active === i;
             return (
               <Fragment key={card.title}>
                 <button
                   type="button"
-                  className={`flowforge-workflow-card w-full max-w-[360px] md:max-w-none md:w-auto md:flex-1 mx-auto md:mx-0 ${
+                  className={`flowforge-workflow-card w-full max-w-90 md:max-w-none md:w-auto md:flex-1 mx-auto md:mx-0 ${
                     isActive ? "active-purple" : ""
                   }`}
                   onClick={() => setActive(i)}
@@ -85,7 +85,7 @@ export function WorkflowDiagram() {
                 </button>
                 {i < flowCards.length - 1 && (
                   <div
-                    className="flowforge-card-arrow-wrapper flex items-center justify-center py-2 md:py-0 px-0 md:px-1 flex-shrink-0"
+                    className="flowforge-card-arrow-wrapper flex items-center justify-center py-2 md:py-0 px-0 md:px-1 shrink-0"
                     aria-hidden="true"
                   >
                     <span className="flowforge-card-arrow inline-flex items-center justify-center text-slate-400">
