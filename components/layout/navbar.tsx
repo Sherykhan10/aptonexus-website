@@ -23,8 +23,8 @@ export function Navbar() {
       <a className="skip-link" href="#main">
         Skip to content
       </a>
-      <header className={`navbar relative z-[100] ${scrolled ? "scrolled" : ""}`}>
-        <div className="container nav-inner relative z-[100]">
+      <header className={`navbar relative z-100 ${scrolled ? "scrolled" : ""}`}>
+        <div className="container nav-inner relative z-100">
           <Link className="brand" href="/" aria-label={`${site.name} home`}>
             <BrandMark priority />
             <span>{site.name}</span>
@@ -54,7 +54,7 @@ export function Navbar() {
           </a>
           <button
             type="button"
-            className="icon-button mobile-menu relative z-[9999] cursor-pointer text-[#166534] border-[#166534]/25"
+            className="icon-button mobile-menu relative z-9999 cursor-pointer text-[#166534] border-[#166534]/25"
             style={{
               pointerEvents: "auto",
               touchAction: "manipulation",
