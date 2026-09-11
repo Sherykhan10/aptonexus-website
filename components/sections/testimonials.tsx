@@ -43,13 +43,13 @@ export function TestimonialMarquee() {
           {reviews.map((review, idx) => (
             <div
               key={`review-1-${idx}`}
-              className="w-[300px] md:w-[400px] flex-shrink-0 mx-4 p-6 bg-[#12181c] border border-white/5 rounded-2xl flex flex-col justify-between"
+              className="w-75 md:w-100 shrink-0 mx-4 p-6 bg-[#12181c] border border-white/5 rounded-2xl flex flex-col justify-between"
             >
               <p className="text-slate-300 text-base mb-6 leading-relaxed">
                 &ldquo;{review.text}&rdquo;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#95f537] flex items-center justify-center text-[#0a1114] font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-brandGreen flex items-center justify-center text-dark font-bold text-sm">
                   {review.name.charAt(0)}
                 </div>
                 <div>
@@ -62,13 +62,13 @@ export function TestimonialMarquee() {
           {reviews.map((review, idx) => (
             <div
               key={`review-2-${idx}`}
-              className="w-[300px] md:w-[400px] flex-shrink-0 mx-4 p-6 bg-[#12181c] border border-white/5 rounded-2xl flex flex-col justify-between"
+              className="w-75 md:w-100 shrink-0 mx-4 p-6 bg-[#12181c] border border-white/5 rounded-2xl flex flex-col justify-between"
             >
               <p className="text-slate-300 text-base mb-6 leading-relaxed">
                 &ldquo;{review.text}&rdquo;
               </p>
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-[#95f537] flex items-center justify-center text-[#0a1114] font-bold text-sm">
+                <div className="w-10 h-10 rounded-full bg-brandGreen flex items-center justify-center text-dark font-bold text-sm">
                   {review.name.charAt(0)}
                 </div>
                 <div>
@@ -81,8 +81,8 @@ export function TestimonialMarquee() {
       </div>
 
       {/* Fade edges for desktop */}
-      <div className="hidden md:block absolute top-0 bottom-0 left-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none" />
-      <div className="hidden md:block absolute top-0 bottom-0 right-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 left-0 w-32 bg-linear-to-r from-white to-transparent z-10 pointer-events-none" />
+      <div className="hidden md:block absolute top-0 bottom-0 right-0 w-32 bg-linear-to-l from-white to-transparent z-10 pointer-events-none" />
     </section>
   );
 }
