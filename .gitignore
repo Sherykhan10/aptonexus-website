@@ -144,3 +144,6 @@ vite.config.ts.timestamp-*
 
 # Unredacted voice-agent source contains a credential; use the edited demo only.
 **/ai-voice-agent.mp4
+
+# Archive files
+*.zip
