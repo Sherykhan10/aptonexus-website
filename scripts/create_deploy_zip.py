@@ -2,7 +2,7 @@ import os
 import zipfile
 
 out_dir = os.path.abspath("out")
-zip_path = os.path.abspath("aptonexus-deploy.zip")
+zip_path = os.path.abspath("deploy.zip")
 
 print(f"Creating POSIX-compliant {zip_path} from {out_dir}...")
 

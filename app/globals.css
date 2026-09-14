@@ -3380,13 +3380,15 @@ body {
     box-shadow: 0 4px 14px rgba(149, 245, 55, 0.38) !important;
   }
   .hero-media {
-    left: 20% !important;
-    right: 0 !important;
+    left: 36% !important;
+    right: -16px !important;
     top: 0 !important;
     bottom: 0 !important;
     height: 100% !important;
     width: auto !important;
     overflow: hidden !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
+    mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
   }
   .hero-media picture,
   .hero-media picture > img,
@@ -3396,18 +3398,14 @@ body {
     width: 100% !important;
     height: 100% !important;
     object-fit: cover !important;
-    object-position: 82% 22% !important;
-    transform: scale(0.9) translateY(0px) !important;
-    transform-origin: 85% top !important;
+    object-position: 88% 18% !important;
+    transform: scale(0.92) translateX(12px) !important;
+    transform-origin: right top !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
+    mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
   }
   .hero-media-shade {
-    position: absolute !important;
-    inset: 0 !important;
-    background:
-      linear-gradient(0deg, #ffffff 0%, #fffffff8 4%, rgba(255, 255, 255, 0) 14%),
-      linear-gradient(90deg, #ffffff 0%, #fffffff8 22%, #ffffffe8 40%, #ffffff66 60%, rgba(255, 255, 255, 0) 80%) !important;
-    z-index: 1 !important;
-    pointer-events: none !important;
+    display: none !important;
   }
   .hero-media-controls {
     right: 12px !important;

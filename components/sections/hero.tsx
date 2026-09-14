@@ -5,7 +5,7 @@ export function Hero() {
   return (
     <section className="hero">
       <div className="container hero-content flex flex-col justify-center">
-        <div className="w-[64%] max-w-[66%] md:w-auto md:max-w-none z-10 flex flex-col justify-center">
+        <div className="w-[56%] max-w-[58%] sm:w-[58%] md:w-auto md:max-w-none z-10 flex flex-col justify-center">
           <p className="hero-eyebrow-tag">
             AI • AUTOMATION • INNOVATION
           </p>
