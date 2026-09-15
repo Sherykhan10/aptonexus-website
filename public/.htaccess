@@ -1,4 +1,4 @@
-﻿# ─────────────────────────────────────────────────────────────────────────────
+# ─────────────────────────────────────────────────────────────────────────────
 # AptoNexus – Apache performance & caching config for Hostinger shared hosting
 # Copied verbatim into public_html by `next build` (output: "export").
 # ─────────────────────────────────────────────────────────────────────────────
@@ -78,12 +78,19 @@
   Header always set Referrer-Policy           "strict-origin-when-cross-origin"
 </IfModule>
 
+# ── Directory Index ──────────────────────────────────────────────────────────
+DirectoryIndex index.html index.htm
+
 # ── Keep clean URLs working for static export ──────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
-  # Serve pre-rendered HTML for extensionless URLs
+  # Ensure directory URLs have a trailing slash so index.html resolves correctly
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^(.*[^/])$ $1/ [L,R=301]
+
+  # Serve pre-rendered HTML for extensionless URLs if existing
   RewriteCond %{REQUEST_FILENAME}             !-f
   RewriteCond %{REQUEST_FILENAME}             !-d
   RewriteCond %{REQUEST_FILENAME}.html        -f
