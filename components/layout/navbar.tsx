@@ -24,6 +24,19 @@ export function Navbar() {
         Skip to content
       </a>
       <header className={`navbar relative z-100 ${scrolled ? "scrolled" : ""}`}>
+        {/* Soft gradient fade so nav links stay legible over the white hero when transparent */}
+        {!scrolled && (
+          <div
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              inset: 0,
+              background: "linear-gradient(to bottom, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.18) 60%, transparent 100%)",
+              pointerEvents: "none",
+              zIndex: 0,
+            }}
+          />
+        )}
         <div className="container nav-inner relative z-100">
           <Link className="brand" href="/" aria-label={`${site.name} home`}>
             <BrandMark priority />
@@ -54,11 +67,12 @@ export function Navbar() {
           </a>
           <button
             type="button"
-            className="icon-button mobile-menu relative z-9999 cursor-pointer text-[#166534] border-[#166534]/25"
+            className="icon-button mobile-menu relative z-9999 cursor-pointer"
             style={{
               pointerEvents: "auto",
               touchAction: "manipulation",
-              color: "#166534",
+              color: "#0f172a",
+              borderColor: "rgba(15,23,42,0.2)",
             }}
             aria-label="Open navigation"
             aria-haspopup="dialog"
@@ -74,7 +88,7 @@ export function Navbar() {
               setOpen(true);
             }}
           >
-            <Icon name="menu" className="w-6 h-6 text-[#166534]" />
+            <Icon name="menu" className="w-6 h-6" />
           </button>
         </div>
       </header>

@@ -27,10 +27,10 @@ export function TestimonialMarquee() {
   return (
     <section className="w-full bg-white py-20 overflow-hidden relative">
       <div className="max-w-7xl mx-auto px-4 md:px-8 mb-12 text-center">
-        <span className="inline-block py-1 px-3 rounded-full bg-slate-100 text-slate-800 text-sm font-medium mb-4 border border-slate-200">
+        <span className="inline-block py-1 px-4 rounded-full text-sm font-semibold mb-4 tracking-wide uppercase" style={{ color: '#6b4ce6', background: 'rgba(107,76,230,0.08)', border: '1px solid rgba(107,76,230,0.25)' }}>
           Testimonials
         </span>
-        <h2 className="text-4xl md:text-5xl font-heading font-extrabold tracking-tight text-slate-900">
+        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900" style={{ fontFamily: 'var(--font-varela), "Varela", sans-serif' }}>
           Hear from our Clients
         </h2>
       </div>

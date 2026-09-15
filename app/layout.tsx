@@ -6,7 +6,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { ContactLauncher } from "@/components/contact/contact-launcher";
 import { services } from "@/content/services";
-import { Space_Grotesk, Lato, Dancing_Script, Plus_Jakarta_Sans } from "next/font/google";
+import { Space_Grotesk, Varela, Dancing_Script, Plus_Jakarta_Sans } from "next/font/google";
 
 const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
@@ -21,11 +21,11 @@ const plusJakartaSans = Plus_Jakarta_Sans({
   weight: ["400", "500", "600", "700", "800"],
 });
 
-const lato = Lato({
+const varela = Varela({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-lato",
-  weight: ["300", "400", "700", "900"],
+  variable: "--font-varela",
+  weight: "400",
 });
 
 const dancingScript = Dancing_Script({
@@ -72,8 +72,40 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en-US" data-scroll-behavior="smooth" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${lato.variable} ${dancingScript.variable}`}>
-      <body className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${lato.variable} ${dancingScript.variable} ${spaceGrotesk.className}`}>
+    <html lang="en-US" data-scroll-behavior="smooth" className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${varela.variable} ${dancingScript.variable}`}>
+      <head>
+        {/* ── Critical CSS: paint baseline colours before the main stylesheet loads ── */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          html,body{
+            background-color:#e8ece4;
+            color:#101510;
+            margin:0;
+            padding:0;
+            font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+          }
+          /* Reserve hero height so the layout doesn't collapse on slow connections */
+          .hero{min-height:730px;}
+          /* Ensure footer dark bg is immediately visible */
+          .footer-flowforge{background:#051d18;color:#ffffff;}
+        `}} />
+        {/* ── Anti-FOUC: hide body until stylesheets parse, 650ms hard fallback ── */}
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function(){
+            document.documentElement.style.visibility='hidden';
+            var t=setTimeout(function(){document.documentElement.style.visibility='';},650);
+            function reveal(){
+              clearTimeout(t);
+              document.documentElement.style.visibility='';
+            }
+            if(document.readyState==='interactive'||document.readyState==='complete'){
+              reveal();
+            } else {
+              document.addEventListener('DOMContentLoaded',reveal,{once:true});
+            }
+          })();
+        `}} />
+      </head>
+      <body className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${varela.variable} ${dancingScript.variable} ${spaceGrotesk.className}`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
