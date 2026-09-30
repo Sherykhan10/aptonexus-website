@@ -2220,20 +2220,27 @@ p {
     transform: translateY(0);
   }
 }
-/* ── Demo Case Study Cards Grid ── */
-.demo-cards-grid {
-  display: grid !important;
-  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
-  gap: 40px !important;
-  padding: 12px 12px 28px !important;
-  overflow: visible !important;
+/* ── Demo Case Study Cards — Marquee Scroll ── */
+.demo-marquee-outer {
+  position: relative !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  /* Ensure shadow accents on first/last cards aren't clipped */
+  padding-block: 20px !important;
 }
-/* Card wrapper */
+.demo-marquee-track {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  gap: 40px !important;
+  padding: 0 20px !important;
+}
+/* Card wrapper — fixed width for marquee */
 .demo-card-wrapper {
   position: relative !important;
   isolation: isolate !important;
-  width: 100% !important;
-  height: 100% !important;
+  width: 320px !important;
+  flex-shrink: 0 !important;
 }
 /* Neon green accent — bottom-right corner */
 .demo-card-green {
@@ -4369,9 +4376,6 @@ p.friction-problem-text strong {
   .tech-cards-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   }
-  .demo-cards-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
-  }
   .process-columns-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
     gap: 28px !important;
@@ -4404,10 +4408,6 @@ p.friction-problem-text strong {
   }
   .tech-cards-grid {
     grid-template-columns: 1fr !important;
-  }
-  .demo-cards-grid {
-    grid-template-columns: 1fr !important;
-    gap: 36px !important;
   }
   .friction-container-split {
     grid-template-columns: 1fr !important;

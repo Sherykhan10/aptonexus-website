@@ -174,4 +174,35 @@ export const projects: Project[] = [
     status: "published",
     metrics: [],
   },
+  {
+    slug: "ai-receptionist-vet-care",
+    workflowSummary: [
+      "Voice / chat request",
+      "Book / reschedule / cancel",
+      "Google Sheets log",
+      "Automated follow-up",
+    ],
+    title: "AI Receptionist for Vet Care",
+    category: "AI Agents / Voice AI",
+    shortDescription:
+      "An AI receptionist designed for vet care systems that books, reschedules, cancels, and searches appointments, then saves them to Google Sheets and sends follow-ups.",
+    description:
+      "This demonstration shows an AI receptionist built for a vet care context. The agent handles incoming appointment requests conversationally — booking, rescheduling, cancelling, and searching — then writes records to Google Sheets and sends automated follow-up messages.",
+    challenge:
+      "Demonstrated use case: managing appointment interactions end-to-end without manual front-desk handling.",
+    solution:
+      "An AI agent processes appointment requests, updates a Google Sheets register, and dispatches follow-up messages automatically.",
+    workflow: [
+      "Receive an appointment request via voice or chat.",
+      "Book, reschedule, cancel, or look up the appointment conversationally.",
+      "Write the appointment record to Google Sheets.",
+      "Send an automated follow-up confirmation or reminder.",
+    ],
+    technologies: ["Google Sheets", "OpenAI"],
+    cover: "/projects/vet-care-receptionist/cover.webp",
+    externalUrl: "https://lnkd.in/p/dDYwRhKc",
+    featured: true,
+    status: "published",
+    metrics: [],
+  },
 ];
