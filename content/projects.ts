@@ -14,6 +14,7 @@ export interface Project {
   cover?: string;
   images?: { src: string; alt: string }[];
   video?: string;
+  embedUrl?: string;
   /** Reviewed WebVTT captions for the edited public video, when available. */
   captions?: string;
   externalUrl?: string;
@@ -198,8 +199,10 @@ export const projects: Project[] = [
       "Write the appointment record to Google Sheets.",
       "Send an automated follow-up confirmation or reminder.",
     ],
-    technologies: ["Google Sheets", "OpenAI"],
+    technologies: ["Vapi", "n8n", "OpenAI", "Google Sheets"],
     cover: "/projects/vet-care-receptionist/cover.webp",
+    video: "/projects/vet-care-receptionist/demo.mp4",
+    embedUrl: "https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7510607361104031745",
     externalUrl: "https://lnkd.in/p/dDYwRhKc",
     featured: true,
     status: "published",

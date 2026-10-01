@@ -75,21 +75,66 @@ export default async function ProjectPage({
             </ol>
           </div>
         )}
-        {project.video && (
+        {(project.video || project.embedUrl) && (
           <div className="project-video">
             <h2>See the demonstration.</h2>
-            <VideoPlayer
-              src={project.video}
-              poster={project.cover}
-              captions={project.captions}
-              title={project.title}
-              description={project.description ?? project.shortDescription}
-            />
-            {!project.captions && (
-              <p className="small muted mt-4">
-                The written workflow above describes the visible system
-                behavior. Full reviewed speech captions are not yet available.
-              </p>
+            {project.video && (
+              <VideoPlayer
+                src={project.video}
+                poster={project.cover}
+                captions={project.captions}
+                title={project.title}
+                description={project.description ?? project.shortDescription}
+              />
+            )}
+            <div className="mt-4 flex flex-wrap items-center justify-between gap-4">
+              {!project.captions && (
+                <p className="small muted mb-0">
+                  The written workflow above describes the visible system
+                  behavior. Full reviewed speech captions are not yet available.
+                </p>
+              )}
+              {project.externalUrl && (
+                <a
+                  className="text-link inline-flex items-center gap-1.5"
+                  href={project.externalUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Watch demo on LinkedIn
+                  <Icon name="diagonal" />
+                </a>
+              )}
+            </div>
+            {project.embedUrl && (
+              <div className="project-embed-wrapper mt-8 pt-8 border-t border-slate-200">
+                <h3 className="font-heading text-lg font-bold mb-3">
+                  Original LinkedIn Post & Demonstration
+                </h3>
+                <p className="text-slate-600 text-sm mb-4">
+                  Watch directly on LinkedIn:{" "}
+                  <a
+                    href={project.externalUrl ?? project.embedUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-brandPurple font-medium hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{project.externalUrl ?? "https://lnkd.in/p/dDYwRhKc"}</span>
+                    <Icon name="diagonal" />
+                  </a>
+                </p>
+                <div className="flex justify-center bg-slate-900/5 rounded-2xl p-4 sm:p-6 overflow-hidden">
+                  <iframe
+                    src={project.embedUrl}
+                    height="560"
+                    width="504"
+                    frameBorder="0"
+                    allowFullScreen
+                    title={`${project.title} demonstration on LinkedIn`}
+                    className="w-full max-w-126 rounded-xl shadow-md border border-slate-200"
+                  />
+                </div>
+              </div>
             )}
           </div>
         )}

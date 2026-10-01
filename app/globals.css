@@ -2220,7 +2220,7 @@ p {
     transform: translateY(0);
   }
 }
-/* ── Demo Case Study Cards — Marquee Scroll ── */
+/* ── Demo Case Study Cards — Marquee Scroll & Mobile Swipe ── */
 .demo-marquee-outer {
   position: relative !important;
   width: 100% !important;
@@ -2234,6 +2234,29 @@ p {
   width: max-content !important;
   gap: 40px !important;
   padding: 0 20px !important;
+}
+@media (max-width: 768px) {
+  .demo-marquee-outer {
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    -webkit-overflow-scrolling: touch !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important;
+    padding-inline: 16px !important;
+    padding-block: 16px 24px !important;
+    touch-action: pan-x pan-y !important;
+  }
+  .demo-marquee-outer::-webkit-scrollbar {
+    display: none !important;
+  }
+  .demo-marquee-track {
+    animation: none !important;
+    transform: none !important;
+    gap: 20px !important;
+    padding: 0 8px !important;
+    width: max-content !important;
+  }
 }
 /* Card wrapper — fixed width for marquee */
 .demo-card-wrapper {
@@ -2372,6 +2395,68 @@ p {
 }
 .demo-card-cta:hover {
   opacity: 0.85 !important;
+}
+
+/* ── Mobile Carousel Controls ── */
+.demo-carousel-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.demo-carousel-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 9999px;
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  color: #0f172a;
+  font-size: 1.1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.demo-carousel-arrow:hover:not(:disabled) {
+  background: #5b45f5;
+  color: #ffffff;
+  border-color: #5b45f5;
+}
+.demo-carousel-arrow:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.demo-carousel-dots {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.demo-carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 9999px;
+  background: #cbd5e1;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+.demo-carousel-dot.active {
+  width: 24px;
+  background: #95f537;
+  box-shadow: 0 0 10px rgba(149, 245, 55, 0.6);
+}
+
+@media (max-width: 768px) {
+  .demo-card-wrapper {
+    scroll-snap-align: center !important;
+    scroll-snap-stop: always !important;
+    width: calc(100vw - 64px) !important;
+    max-width: 330px !important;
+  }
 }
 .friction-section {
   background: var(--surface-dark-soft);
