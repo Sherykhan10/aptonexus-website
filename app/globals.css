@@ -3499,9 +3499,9 @@ body {
     bottom: 0 !important;
     height: 100% !important;
     width: 100% !important;
-    overflow: hidden !important;
-    -webkit-mask-image: linear-gradient(to right, transparent 38%, #000000 55%) !important;
-    mask-image: linear-gradient(to right, transparent 38%, #000000 55%) !important;
+    overflow: visible !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
   .hero-media picture,
   .hero-media picture > img,
@@ -3514,11 +3514,12 @@ body {
     object-position: 88% 18% !important;
     transform: scale(0.92) translateX(12px) !important;
     transform-origin: right top !important;
-    -webkit-mask-image: none !important;
-    mask-image: none !important;
+    -webkit-mask-image: linear-gradient(to left, #000000 45%, transparent 72%) !important;
+    mask-image: linear-gradient(to left, #000000 45%, transparent 72%) !important;
   }
   .hero-media-shade {
-    display: none !important;
+    display: block !important;
+    background: linear-gradient(to right, #ffffff 0%, #ffffffee 32%, #ffffff88 52%, transparent 70%) !important;
   }
   .hero-media-controls {
     right: 12px !important;
@@ -5006,18 +5007,22 @@ p.friction-problem-text strong {
   }
 }
 
-/* ── Testimonial Marquee ── */
+/* ── Marquee animation — desktop only; mobile uses native swipe scroll ── */
 @keyframes marquee {
-  0% {
-    transform: translateX(0%);
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+@media (min-width: 769px) {
+  .animate-marquee {
+    animation: marquee 100s linear infinite;
   }
-  100% {
-    transform: translateX(-50%);
+  .animate-marquee:hover {
+    animation-play-state: paused;
   }
 }
-.animate-marquee {
-  animation: marquee 100s linear infinite !important;
-}
-.animate-marquee:hover {
-  animation-play-state: paused !important;
+@media (max-width: 768px) {
+  .animate-marquee {
+    animation: none !important;
+    transform: none !important;
+  }
 }
