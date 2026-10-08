@@ -58,15 +58,15 @@ export function WorkflowDiagram() {
         {/* Mobile: Continuous Auto-scrolling Marquee */}
         <div className="md:hidden flex overflow-hidden relative w-full py-2">
           {/* Edge gradient fade masks */}
-          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
-          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-8 bg-linear-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-8 bg-linear-to-l from-white to-transparent z-10" />
 
           {/* Marquee Track */}
           <div className="flex w-max items-center animate-marquee-workflow hover:[animation-play-state:paused] py-3 gap-3">
             {/* Set 1 */}
             {flowCards.map((card) => (
               <Fragment key={`m1-${card.title}`}>
-                <div className="w-[240px] shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
+                <div className="w-60 shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
                   <div
                     className={`flowforge-card-icon-circle ${
                       card.isCheck ? "icon-green" : "icon-purple"
@@ -91,7 +91,7 @@ export function WorkflowDiagram() {
             {/* Set 2 for seamless infinite loop */}
             {flowCards.map((card) => (
               <Fragment key={`m2-${card.title}`}>
-                <div className="w-[240px] shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
+                <div className="w-60 shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
                   <div
                     className={`flowforge-card-icon-circle ${
                       card.isCheck ? "icon-green" : "icon-purple"
