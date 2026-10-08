@@ -82,9 +82,12 @@ export default function RootLayout({
             margin:0;
             padding:0;
             font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+            overflow-x:hidden;
+            max-width:100vw;
+            width:100%;
           }
           /* Reserve hero height so the layout doesn't collapse on slow connections */
-          .hero{min-height:730px;}
+          .hero{min-height:730px;overflow-x:hidden;max-width:100vw;}
           /* Ensure footer dark bg is immediately visible */
           .footer-flowforge{background:#051d18;color:#ffffff;}
         `}} />
@@ -105,7 +108,7 @@ export default function RootLayout({
           })();
         `}} />
       </head>
-      <body className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${varela.variable} ${dancingScript.variable} ${spaceGrotesk.className}`}>
+      <body className={`${spaceGrotesk.variable} ${plusJakartaSans.variable} ${varela.variable} ${dancingScript.variable} ${spaceGrotesk.className} overflow-x-hidden max-w-full w-full relative`}>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

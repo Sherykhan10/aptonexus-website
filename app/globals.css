@@ -89,6 +89,9 @@
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 100px;
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
 }
 html,
 body,
@@ -108,6 +111,16 @@ body {
   color: var(--ink);
   letter-spacing: 0;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative;
+}
+main, #main {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  width: 100% !important;
+  position: relative;
 }
 h1,
 h2,
@@ -5007,22 +5020,56 @@ p.friction-problem-text strong {
   }
 }
 
-/* ── Marquee animation — desktop only; mobile uses native swipe scroll ── */
+/* ── Marquee animation — continuous auto-scroll ── */
 @keyframes marquee {
   0%   { transform: translateX(0%); }
   100% { transform: translateX(-50%); }
 }
-@media (min-width: 769px) {
-  .animate-marquee {
-    animation: marquee 100s linear infinite;
-  }
-  .animate-marquee:hover {
-    animation-play-state: paused;
-  }
+.animate-marquee {
+  animation: marquee 80s linear infinite !important;
+  will-change: transform;
 }
-@media (max-width: 768px) {
-  .animate-marquee {
-    animation: none !important;
-    transform: none !important;
-  }
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Dedicated continuous auto-scroll marquee for Workflow Collaboration section */
+@keyframes marquee-workflow {
+  0%   { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+.animate-marquee-workflow {
+  animation: marquee-workflow 24s linear infinite !important;
+  will-change: transform;
+}
+.animate-marquee-workflow:hover {
+  animation-play-state: paused;
+}
+
+/* ── Mobile Projects Horizontal Swipe Carousel with CSS Scroll Snapping ── */
+.mobile-projects-swipe {
+  display: flex !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch !important;
+  scroll-snap-type: x mandatory !important;
+  scroll-behavior: smooth !important;
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+  padding-block: 16px 24px !important;
+  touch-action: pan-x pan-y !important;
+}
+.mobile-projects-swipe::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+.mobile-project-snap-card {
+  scroll-snap-align: center !important;
+  scroll-snap-stop: always !important;
+  flex-shrink: 0 !important;
+}
+.mobile-project-snap-card .demo-card-wrapper {
+  width: 100% !important;
+  max-width: 320px !important;
 }

@@ -90,7 +90,7 @@ export function SelectedWorkCarousel({ projects }: { projects: Project[] }) {
     const container = scrollRef.current;
     if (!container) return;
     const cards = container.querySelectorAll<HTMLElement>(
-      ".demo-card-wrapper[data-card-index]"
+      ".mobile-project-snap-card, .demo-card-wrapper[data-card-index]"
     );
     if (cards[index]) {
       const card = cards[index];
@@ -113,7 +113,7 @@ export function SelectedWorkCarousel({ projects }: { projects: Project[] }) {
       if (!ticking) {
         window.requestAnimationFrame(() => {
           const cards = container.querySelectorAll<HTMLElement>(
-            ".demo-card-wrapper[data-card-index]"
+            ".mobile-project-snap-card, .demo-card-wrapper[data-card-index]"
           );
           if (cards.length > 0) {
             const containerCenter =
@@ -146,77 +146,106 @@ export function SelectedWorkCarousel({ projects }: { projects: Project[] }) {
 
   return (
     <div className="w-full">
-      <div ref={scrollRef} className="demo-marquee-outer">
-        <div className="demo-marquee-track animate-marquee hover:[animation-play-state:paused]">
-          {/* Primary set (always visible, interactive swipe on mobile) */}
+      {/* Mobile: Manual, touch-friendly horizontal swipe carousel with CSS Scroll Snapping */}
+      <div className="md:hidden w-full overflow-hidden">
+        <div
+          ref={scrollRef}
+          className="mobile-projects-swipe flex overflow-x-auto gap-4 py-4 px-4 w-full"
+          style={{
+            scrollSnapType: "x mandatory",
+            WebkitOverflowScrolling: "touch",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+          }}
+        >
           {projects.map((project, index) => (
-            <DemoCard
-              key={`a-${project.slug}`}
-              project={project}
-              index={index}
-            />
+            <div
+              key={`m-${project.slug}`}
+              className="mobile-project-snap-card shrink-0"
+              style={{
+                scrollSnapAlign: "center",
+                scrollSnapStop: "always",
+                width: "min(84vw, 320px)",
+              }}
+              data-card-index={index}
+            >
+              <DemoCard project={project} index={index} />
+            </div>
           ))}
-          {/* Duplicate set for seamless infinite CSS loop on desktop, hidden on mobile */}
-          <div className="hidden md:flex items-center gap-10">
+        </div>
+
+        {/* Mobile Swipe Navigation Controls */}
+        <div className="flex flex-col items-center gap-3 pt-2">
+          <div className="demo-carousel-controls">
+            <button
+              type="button"
+              className="demo-carousel-arrow"
+              onClick={() => scrollToIndex(Math.max(0, activeIndex - 1))}
+              disabled={activeIndex === 0}
+              aria-label="Previous project"
+            >
+              ←
+            </button>
+            <div
+              className="demo-carousel-dots"
+              role="tablist"
+              aria-label="Project slides"
+            >
+              {projects.map((p, idx) => (
+                <button
+                  key={p.slug}
+                  type="button"
+                  className={`demo-carousel-dot ${
+                    idx === activeIndex ? "active" : ""
+                  }`}
+                  onClick={() => scrollToIndex(idx)}
+                  aria-label={`Go to project ${idx + 1}: ${p.title}`}
+                  aria-selected={idx === activeIndex}
+                  role="tab"
+                />
+              ))}
+            </div>
+            <button
+              type="button"
+              className="demo-carousel-arrow"
+              onClick={() =>
+                scrollToIndex(Math.min(projects.length - 1, activeIndex + 1))
+              }
+              disabled={activeIndex === projects.length - 1}
+              aria-label="Next project"
+            >
+              →
+            </button>
+          </div>
+          <p className="text-xs text-slate-400 font-medium tracking-wide flex items-center gap-1.5">
+            <span>←</span>
+            <span>Swipe cards to explore</span>
+            <span>→</span>
+          </p>
+        </div>
+      </div>
+
+      {/* Desktop: Continuous Marquee track */}
+      <div className="hidden md:block w-full">
+        <div className="demo-marquee-outer">
+          <div className="demo-marquee-track animate-marquee hover:[animation-play-state:paused]">
             {projects.map((project, index) => (
               <DemoCard
-                key={`b-${project.slug}`}
+                key={`desk-a-${project.slug}`}
+                project={project}
+                index={index}
+              />
+            ))}
+            {/* Duplicated set for seamless loop */}
+            {projects.map((project, index) => (
+              <DemoCard
+                key={`desk-b-${project.slug}`}
                 project={project}
                 index={index}
               />
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Mobile Swipe Navigation Controls */}
-      <div className="md:hidden flex flex-col items-center gap-3 pt-3">
-        <div className="demo-carousel-controls">
-          <button
-            type="button"
-            className="demo-carousel-arrow"
-            onClick={() => scrollToIndex(Math.max(0, activeIndex - 1))}
-            disabled={activeIndex === 0}
-            aria-label="Previous project"
-          >
-            ←
-          </button>
-          <div
-            className="demo-carousel-dots"
-            role="tablist"
-            aria-label="Project slides"
-          >
-            {projects.map((p, idx) => (
-              <button
-                key={p.slug}
-                type="button"
-                className={`demo-carousel-dot ${
-                  idx === activeIndex ? "active" : ""
-                }`}
-                onClick={() => scrollToIndex(idx)}
-                aria-label={`Go to project ${idx + 1}: ${p.title}`}
-                aria-selected={idx === activeIndex}
-                role="tab"
-              />
-            ))}
-          </div>
-          <button
-            type="button"
-            className="demo-carousel-arrow"
-            onClick={() =>
-              scrollToIndex(Math.min(projects.length - 1, activeIndex + 1))
-            }
-            disabled={activeIndex === projects.length - 1}
-            aria-label="Next project"
-          >
-            →
-          </button>
-        </div>
-        <p className="text-xs text-slate-400 font-medium tracking-wide flex items-center gap-1.5">
-          <span>←</span>
-          <span>Swipe cards to explore</span>
-          <span>→</span>
-        </p>
       </div>
     </div>
   );

@@ -14,7 +14,7 @@ import { IndustriesGrid } from "@/components/sections/industries-grid";
 
 export default function Home() {
   return (
-    <main id="main">
+    <main id="main" className="overflow-x-hidden max-w-full w-full relative">
       <Hero />
       <Capabilities />
       <ServicesSection />

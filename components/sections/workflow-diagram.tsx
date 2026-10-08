@@ -55,7 +55,69 @@ export function WorkflowDiagram() {
           </h2>
         </div>
 
-        <div className="flowforge-workflow-row flex flex-col md:flex-row items-center justify-between gap-2 md:gap-3 max-w-300 mx-auto w-full">
+        {/* Mobile: Continuous Auto-scrolling Marquee */}
+        <div className="md:hidden flex overflow-hidden relative w-full py-2">
+          {/* Edge gradient fade masks */}
+          <div className="pointer-events-none absolute top-0 bottom-0 left-0 w-8 bg-gradient-to-r from-white to-transparent z-10" />
+          <div className="pointer-events-none absolute top-0 bottom-0 right-0 w-8 bg-gradient-to-l from-white to-transparent z-10" />
+
+          {/* Marquee Track */}
+          <div className="flex w-max items-center animate-marquee-workflow hover:[animation-play-state:paused] py-3 gap-3">
+            {/* Set 1 */}
+            {flowCards.map((card) => (
+              <Fragment key={`m1-${card.title}`}>
+                <div className="w-[240px] shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
+                  <div
+                    className={`flowforge-card-icon-circle ${
+                      card.isCheck ? "icon-green" : "icon-purple"
+                    } mb-3`}
+                  >
+                    <Icon name={card.icon} />
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                    Step 0{card.step}
+                  </span>
+                  <h3 className="text-base font-bold text-slate-900 mb-1">{card.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">{card.text}</p>
+                </div>
+                <div
+                  className="shrink-0 flex items-center justify-center px-1 text-slate-400"
+                  aria-hidden="true"
+                >
+                  <Icon name="arrow" className="w-4 h-4 text-slate-400" />
+                </div>
+              </Fragment>
+            ))}
+            {/* Set 2 for seamless infinite loop */}
+            {flowCards.map((card) => (
+              <Fragment key={`m2-${card.title}`}>
+                <div className="w-[240px] shrink-0 p-5 bg-white border border-slate-200 rounded-2xl flex flex-col items-center text-center shadow-xs">
+                  <div
+                    className={`flowforge-card-icon-circle ${
+                      card.isCheck ? "icon-green" : "icon-purple"
+                    } mb-3`}
+                  >
+                    <Icon name={card.icon} />
+                  </div>
+                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1">
+                    Step 0{card.step}
+                  </span>
+                  <h3 className="text-base font-bold text-slate-900 mb-1">{card.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">{card.text}</p>
+                </div>
+                <div
+                  className="shrink-0 flex items-center justify-center px-1 text-slate-400"
+                  aria-hidden="true"
+                >
+                  <Icon name="arrow" className="w-4 h-4 text-slate-400" />
+                </div>
+              </Fragment>
+            ))}
+          </div>
+        </div>
+
+        {/* Desktop: Connected Interactive Chain */}
+        <div className="flowforge-workflow-row hidden md:flex items-center justify-between gap-2 md:gap-3 max-w-300 mx-auto w-full">
           {flowCards.map((card, i) => {
             const isActive = active === i;
             return (
@@ -102,7 +164,7 @@ export function WorkflowDiagram() {
         </div>
 
         {workflow[active] && (
-          <div className="flowforge-workflow-detail-strip">
+          <div className="flowforge-workflow-detail-strip hidden md:flex">
             <span className="detail-tag">
               0{active + 1} / {workflow[active].kind}
             </span>
