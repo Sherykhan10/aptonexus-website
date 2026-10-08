@@ -3493,15 +3493,15 @@ body {
     box-shadow: 0 4px 14px rgba(149, 245, 55, 0.38) !important;
   }
   .hero-media {
-    left: 36% !important;
-    right: -16px !important;
+    left: 0 !important;
+    right: 0 !important;
     top: 0 !important;
     bottom: 0 !important;
     height: 100% !important;
-    width: auto !important;
+    width: 100% !important;
     overflow: hidden !important;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
-    mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
+    -webkit-mask-image: linear-gradient(to right, transparent 38%, #000000 55%) !important;
+    mask-image: linear-gradient(to right, transparent 38%, #000000 55%) !important;
   }
   .hero-media picture,
   .hero-media picture > img,
@@ -3514,8 +3514,8 @@ body {
     object-position: 88% 18% !important;
     transform: scale(0.92) translateX(12px) !important;
     transform-origin: right top !important;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
-    mask-image: linear-gradient(to right, transparent 0%, #000000 25%) !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
   .hero-media-shade {
     display: none !important;
